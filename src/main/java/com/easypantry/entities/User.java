@@ -11,12 +11,12 @@ public class User {
     public String toString() {
         return "userID"+id+" - "+"Username"+username;
     }
-
-//    public User(String username, String email, String password) {
-//        this.username = username;
-//        this.email = email;
-//        this.password = password;
-//    }
+    protected  User(){}
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
