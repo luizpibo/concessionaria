@@ -3,6 +3,7 @@ package com.concessionaria.entities;
 import org.springframework.data.annotation.Id;
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -23,6 +24,12 @@ public class ClienteModel {
     private LocalDateTime data_nascimento;
     @Column(name = "endereco")
     private String endereco;
+    @ManyToMany(mappedBy = "clientes")
+    private List<LojaModel> Lojas;
+    @OneToMany
+    private List<PedidoModel> pedidos;
+    @OneToOne
+    private UserModel user;
     protected ClienteModel(){}
     public ClienteModel(String nome, String cpf, String telefone, String rg, LocalDateTime data_nascimento, String endereco) {
         this.nome = nome;
@@ -68,10 +75,14 @@ public class ClienteModel {
     public void setData_nascimento(LocalDateTime data_nascimento) {
         this.data_nascimento = data_nascimento;
     }
-    public String getEndereco() {
-        return endereco;
-    }
+    public String getEndereco() {return endereco;}
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
+    public List<LojaModel> getLojas() {return Lojas;}
+    public void setLojas(List<LojaModel> lojas) {Lojas = lojas;}
+    public List<PedidoModel> getPedidos() {return pedidos;}
+    public void setPedidos(List<PedidoModel> pedidos) {this.pedidos = pedidos;}
+    public UserModel getUser() {return user;}
+    public void setUser(UserModel user) {this.user = user;}
 }

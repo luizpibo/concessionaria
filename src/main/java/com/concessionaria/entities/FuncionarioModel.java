@@ -24,6 +24,10 @@ public class FuncionarioModel {
     private String endereco;
     @Column(name = "cargo")
     private String cargo;
+    @ManyToOne
+    private LojaModel loja;
+    @OneToOne
+    private UserModel user;
 
     public FuncionarioModel(String nome, String cpf, String telefone, String rg, LocalDateTime data_nascimento, String endereco, String cargo) {
         this.nome = nome;
@@ -34,68 +38,54 @@ public class FuncionarioModel {
         this.endereco = endereco;
         this.cargo = cargo;
     }
-
     public UUID getId() {
         return id;
     }
-
     public void setId(UUID id) {
         this.id = id;
     }
-
     public String getNome() {
         return nome;
     }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
-
     public String getCpf() {
         return cpf;
     }
-
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-
     public String getTelefone() {
         return telefone;
     }
-
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-
     public String getRg() {
         return rg;
     }
-
     public void setRg(String rg) {
         this.rg = rg;
     }
-
     public LocalDateTime getData_nascimento() {
         return data_nascimento;
     }
-
     public void setData_nascimento(LocalDateTime data_nascimento) {
         this.data_nascimento = data_nascimento;
     }
-
     public String getEndereco() {
         return endereco;
     }
-
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
-
     public String getCargo() {
         return cargo;
     }
-
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
+    public LojaModel getLoja() {return loja;}
+    public void setLoja(LojaModel loja) {this.loja = loja;}
 }
