@@ -2,7 +2,6 @@ package com.concessionaria.entities;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-
 import com.sun.istack.NotNull;
 import java.util.Objects;
 import java.util.UUID;
@@ -10,14 +9,12 @@ import java.util.UUID;
 @Entity
 @Table(name="Pedido")
 public class PedidoModel {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
     private UUID id;
+    @OneToOne
     @Column(name = "id_cliente", nullable = false)
     private UUID id_cliente;
-    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "numero_pedido", nullable = false)
     private long numero_pedido;

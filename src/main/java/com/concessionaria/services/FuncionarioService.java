@@ -5,6 +5,7 @@ import com.concessionaria.repositories.FuncionarioRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class FuncionarioService {
@@ -12,7 +13,7 @@ public class FuncionarioService {
 
     public List<FuncionarioModel> getAllFuncionario(){return (List<FuncionarioModel>) funcionarioRepository.findAll();}
 
-    public FuncionarioModel findFuncionarioById(Long id) {
+    public FuncionarioModel findFuncionarioById(UUID id) {
         return funcionarioRepository.findById(id).get();
     }
 

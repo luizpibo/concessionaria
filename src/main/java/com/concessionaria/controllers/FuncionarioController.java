@@ -3,11 +3,14 @@ package com.concessionaria.controllers;
 import com.concessionaria.entities.FuncionarioModel;
 import com.concessionaria.services.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class FuncionarioController {
@@ -15,12 +18,12 @@ public class FuncionarioController {
     private FuncionarioService funcionarioService;
 
     @GetMapping("/funcionario")
-    public List<FuncionarioModel> getAllUsers() {
-        return funcionarioService.getAllFuncionario();
+    public ResponseEntity<List<FuncionarioModel>> getAllUsers() {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(funcionarioService.getAllFuncionario());
     }
 
     @GetMapping("/funcionario/{id}")
-    public FuncionarioModel getFuncionarioById(@PathVariable(value = "id") Long userId){
-        return funcionarioService.findFuncionarioById(userId);
+    public ResponseEntity<FuncionarioModel> getFuncionarioById(@PathVariable(value = "id") UUID userId){
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(funcionarioService.findFuncionarioById(userId));
     }
 }

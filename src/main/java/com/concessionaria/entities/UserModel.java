@@ -1,4 +1,5 @@
 package com.concessionaria.entities;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -8,7 +9,6 @@ import java.util.UUID;
 public class UserModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
     private UUID id;
     private String username, email, password;
     private LocalDateTime registrationDate;

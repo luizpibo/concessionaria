@@ -4,13 +4,14 @@ import com.concessionaria.entities.PagamentoModel;
 import com.concessionaria.repositories.PagamentoRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 public class PagamentoService {
     private PagamentoRepository pagamentoRepository;
 
     public List<PagamentoModel> getAllPagamento(){return (List<PagamentoModel>) pagamentoRepository.findAll();}
 
-    public PagamentoModel findPagamentoById(Long id) {
+    public PagamentoModel findPagamentoById(UUID id) {
         return pagamentoRepository.findById(id).get();
     }
 

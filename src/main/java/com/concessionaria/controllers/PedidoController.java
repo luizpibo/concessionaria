@@ -3,11 +3,14 @@ package com.concessionaria.controllers;
 import com.concessionaria.entities.PedidoModel;
 import com.concessionaria.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class PedidoController {
@@ -15,13 +18,12 @@ public class PedidoController {
     private PedidoService pedidoService;
 
     @GetMapping("/pedido")
-    public List<PedidoModel> getAllPedidos() {
-
-        return pedidoService.getAllPedidos();
+    public ResponseEntity<List<PedidoModel>> getAllPedidos() {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(pedidoService.getAllPedidos());
     }
 
     @GetMapping("/pedido/{id}")
-    public PedidoModel getPedidoById(@PathVariable(value = "id") Long pedidoId){
-        return pedidoService.findPedidoById(pedidoId);
+    public ResponseEntity<PedidoModel> getPedidoById(@PathVariable(value = "id") UUID pedidoId){
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(pedidoService.findPedidoById(pedidoId));
     }
 }

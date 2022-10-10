@@ -1,7 +1,7 @@
 package com.concessionaria.entities;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -9,7 +9,6 @@ import java.util.UUID;
 public class FuncionarioModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
     private UUID id;
     @Column(name = "nome", length = 40)
     private String nome;
@@ -20,13 +19,13 @@ public class FuncionarioModel {
     @Column(name = "rg", length = 7)
     private String rg;
     @Column(name = "data_nascimento")
-    private Date data_nascimento;
+    private LocalDateTime data_nascimento;
     @Column(name = "endereco")
     private String endereco;
     @Column(name = "cargo")
     private String cargo;
 
-    public FuncionarioModel(String nome, String cpf, String telefone, String rg, Date data_nascimento, String endereco, String cargo) {
+    public FuncionarioModel(String nome, String cpf, String telefone, String rg, LocalDateTime data_nascimento, String endereco, String cargo) {
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
@@ -76,11 +75,11 @@ public class FuncionarioModel {
         this.rg = rg;
     }
 
-    public Date getData_nascimento() {
+    public LocalDateTime getData_nascimento() {
         return data_nascimento;
     }
 
-    public void setData_nascimento(Date data_nascimento) {
+    public void setData_nascimento(LocalDateTime data_nascimento) {
         this.data_nascimento = data_nascimento;
     }
 

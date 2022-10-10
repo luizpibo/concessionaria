@@ -3,5 +3,7 @@ package com.concessionaria.repositories;
 import com.concessionaria.entities.PedidoModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PedidoRepository extends JpaRepository<PedidoModel, Long> {
+import java.util.UUID;
+
+public interface PedidoRepository extends JpaRepository<PedidoModel, UUID> {
 }

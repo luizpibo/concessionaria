@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -21,7 +22,7 @@ public class UserService {
         return (List<UserModel>) userRepository.findAll();
     }
 
-    public UserModel findUserById(Long id) {
+    public UserModel findUserById(UUID id) {
         return userRepository.findById(id).get();
     }
 

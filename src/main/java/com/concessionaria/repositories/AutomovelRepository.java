@@ -4,7 +4,8 @@ import com.concessionaria.entities.AutomovelModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
+import java.util.UUID;
 
-public interface AutomovelRepository extends JpaRepository<AutomovelModel, Long> {
-    Optional<AutomovelModel> findById(Long id);
+public interface AutomovelRepository extends JpaRepository<AutomovelModel, UUID> {
+    Optional<AutomovelModel> findById(UUID id);
 }

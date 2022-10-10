@@ -10,7 +10,6 @@ import java.util.UUID;
 public class PagamentoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
     private UUID id;
     @Column(name = "id_pedido")
     private UUID id_pedido;
