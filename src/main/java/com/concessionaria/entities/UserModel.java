@@ -16,17 +16,16 @@ public class UserModel {
     public String toString() {
         return "userID"+id+" - "+"Username"+username+" - "+"Data de registro "+registrationDate.toString();
     }
-    public UserModel(){}
+    public UserModel(){};
     public UserModel(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
     }
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public UUID getId(){
         return this.id;
     }
+    public void setId(UUID id) {this.id = id;}
     @Column(name = "username", nullable = false)
     public String getUsername() {
         return username;

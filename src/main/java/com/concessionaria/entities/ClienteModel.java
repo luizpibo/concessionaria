@@ -1,6 +1,5 @@
 package com.concessionaria.entities;
 
-import org.springframework.data.annotation.Id;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,7 +24,7 @@ public class ClienteModel {
     @Column(name = "endereco")
     private String endereco;
     @ManyToMany(mappedBy = "clientes")
-    private List<LojaModel> Lojas;
+    private List<LojaModel> lojas;
     @OneToMany
     private List<PedidoModel> pedidos;
     @OneToOne
@@ -79,8 +78,8 @@ public class ClienteModel {
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
-    public List<LojaModel> getLojas() {return Lojas;}
-    public void setLojas(List<LojaModel> lojas) {Lojas = lojas;}
+    public List<LojaModel> getLojas() {return lojas;}
+    public void setLojas(List<LojaModel> lojas) {lojas = lojas;}
     public List<PedidoModel> getPedidos() {return pedidos;}
     public void setPedidos(List<PedidoModel> pedidos) {this.pedidos = pedidos;}
     public UserModel getUser() {return user;}

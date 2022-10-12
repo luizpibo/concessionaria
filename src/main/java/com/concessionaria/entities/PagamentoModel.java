@@ -13,12 +13,13 @@ public class PagamentoModel {
     private UUID id;
     @Column(name = "data_vencimento")
     private LocalDateTime data_vencimento;
-    @Column(name = "data_vencimento")
+    @Column(name = "data_pagamento")
     private LocalDateTime data_pagamento;
     @Column(name = "tipo_pagamento")
     private int tipo_pagamento;
 
     @ManyToOne
+    @JoinColumn(name = "idPedido")
     private PedidoModel pedido;
 
     protected PagamentoModel(){}

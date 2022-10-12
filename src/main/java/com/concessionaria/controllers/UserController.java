@@ -13,16 +13,17 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/users")
 public class UserController {
     @Autowired
     private UserService userService;
-
-    @GetMapping("/users")
+    @GetMapping("/")
     public ResponseEntity<List<UserModel>> getAllUsers() {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.getAllUsers());
     }
-    @PostMapping("/users/create")
+    @PostMapping("/create")
     public ResponseEntity<UserModel> createUser(@RequestBody @Validated UserDTO userDTO){
+
         UserModel newUser = new UserModel();
         newUser = userService.save(userDTO);
         if(newUser != null){
@@ -30,7 +31,7 @@ public class UserController {
         }
         return ResponseEntity.status(HttpStatus.CONFLICT).body(newUser);
     }
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<UserModel> getUserById(@PathVariable(value = "id") UUID userId){
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.findUserById(userId));
     }

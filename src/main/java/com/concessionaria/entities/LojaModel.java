@@ -29,8 +29,8 @@ public class LojaModel {
 
     @ManyToMany
     @JoinTable(name = "Loja_Cliente",
-            joinColumns = @JoinColumn(name = "id"),
-            inverseJoinColumns = @JoinColumn(name ="id"))
+            joinColumns = @JoinColumn(name = "idCliente"),
+            inverseJoinColumns = @JoinColumn(name ="idLoja"))
     private List<ClienteModel> clientes;
     protected LojaModel(){}
     public LojaModel(String nome_fantasia, String cnpj, String razao_social, String endereco, String telefone, String tipo){

@@ -17,7 +17,7 @@ public class PedidoController {
     @Autowired
     private PedidoService pedidoService;
 
-    @GetMapping("/pedido")
+    @GetMapping("/pedidos")
     public ResponseEntity<List<PedidoModel>> getAllPedidos() {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(pedidoService.getAllPedidos());
     }
