@@ -28,15 +28,18 @@ public class UserService {
         return userRepository.findById(id).get();
     }
 
-    public UserModel save(UserDTO userDTO){
-        var userModel= new UserModel();
-        if(!userRepository.findByUsername(userDTO.getUsername()).isEmpty()){
+    public  UserModel createUser(UserDTO userdto) throws UserAlreadyExistException{
+        UserModel newUser = new UserModel();
+        if(userRepository.findByUsername(userdto.getUsername()).isEmpty()){
+            throw new UserAlreadyExistException("username already exists");
+        }
+        if(!userRepository.findByEmail(userdto.getEmail()).isEmpty()){
             return null;
         }
-
-        BeanUtils.copyProperties(userDTO, userModel);
-        userModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
-
+        BeanUtils.copyProperties(userdto, newUser);
+        return saveUser(newUser);
+    }
+    public UserModel saveUser(UserModel userModel){
         return userRepository.save(userModel);
     }
 }
