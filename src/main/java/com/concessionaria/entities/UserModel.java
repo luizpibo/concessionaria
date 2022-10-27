@@ -1,53 +1,37 @@
 package com.concessionaria.entities;
 
+import com.concessionaria.utilsClasses.DateAudit;
+import lombok.*;
+
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name = "User")
-public class UserModel {
+@EqualsAndHashCode(callSuper = true)
+public class UserModel extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    private String username, email, password;
-    private LocalDateTime registrationDate;
-    @Override
-    public String toString() {
-        return "userID"+id+" - "+"Username"+username+" - "+"Data de registro "+registrationDate.toString();
-    }
-    public UserModel(){};
-    public UserModel(String username, String email, String password) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
-    public UUID getId(){
-        return this.id;
-    }
-    public void setId(UUID id) {this.id = id;}
-    @Column(name = "username", nullable = false)
-    public String getUsername() {
-        return username;
-    }
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    @Column(name = "email", nullable = false)
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    @Column(name = "password", nullable = false)
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    @Column(name = "registration_date", nullable = false)
-    public LocalDateTime getRegistrationDate(){return registrationDate;}
-    public void setRegistrationDate(LocalDateTime dateTime){this.registrationDate = dateTime;}
+    @Column(unique = true, length = 50, nullable = false)
+    @NonNull
+    private String username;
+    @Column(length = 50, nullable = false)
+    @NonNull
+    private String password;
+    @Column(unique = true, length = 50, nullable = false)
+    @NonNull
+    private String email;
+
+    @ManyToMany
+    @JoinTable(
+        name = "users_roles",
+        joinColumns = @JoinColumn(
+            name = "user_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(
+            name = "role_id", referencedColumnName = "id"))
+    private List<Roles> roles;
 }

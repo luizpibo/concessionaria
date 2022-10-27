@@ -1,4 +1,4 @@
-package com.concessionaria.services;
+package com.concessionaria.services.User;
 
 import com.concessionaria.DTOs.UserDTO;
 import com.concessionaria.entities.UserModel;
@@ -9,14 +9,12 @@ import org.springframework.stereotype.Service;
 
 
 import javax.transaction.Transactional;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.List;
 import java.util.UUID;
 
 @Service
 @Transactional
-public class UserService {
+public class UserServiceImplementation implements  UserService{
     @Autowired
     private UserRepository userRepository;
 
@@ -28,10 +26,10 @@ public class UserService {
         return userRepository.findById(id).get();
     }
 
-    public  UserModel createUser(UserDTO userdto) throws UserAlreadyExistException{
+    public  UserModel createUser(UserDTO userdto){
         UserModel newUser = new UserModel();
         if(userRepository.findByUsername(userdto.getUsername()).isEmpty()){
-            throw new UserAlreadyExistException("username already exists");
+            return null;
         }
         if(!userRepository.findByEmail(userdto.getEmail()).isEmpty()){
             return null;

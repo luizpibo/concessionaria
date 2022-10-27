@@ -1,7 +1,9 @@
 package com.concessionaria.security;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 @Configuration
@@ -9,8 +11,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests()
-                .antMatchers("/users","/users/**")
-                .permitAll().and().httpBasic();
+        http.authorizeRequests()
+                .antMatchers("/users","/users/create","/users/**")
+                .permitAll().anyRequest().authenticated();
+    }
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers(HttpMethod.POST, "/users/create", "/users/login");
+        web.ignoring().antMatchers(HttpMethod.GET, "/users/create", "/users/login");
     }
 }

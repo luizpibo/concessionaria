@@ -2,7 +2,7 @@ package com.concessionaria.controllers;
 
 import com.concessionaria.DTOs.UserDTO;
 import com.concessionaria.entities.UserModel;
-import com.concessionaria.services.UserService;
+import com.concessionaria.services.User.UserServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,16 +16,15 @@ import java.util.UUID;
 @RequestMapping("/users")
 public class UserController {
     @Autowired
-    private UserService userService;
-    @GetMapping("/")
+    private UserServiceImplementation userServiceImplementation;
+    @GetMapping
     public ResponseEntity<List<UserModel>> getAllUsers() {
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.getAllUsers());
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(userServiceImplementation.getAllUsers());
     }
     @PostMapping("/create")
     public ResponseEntity<UserModel> createUser(@RequestBody @Validated UserDTO userDTO){
-
-        UserModel newUser = new UserModel();
-        newUser = userService.save(userDTO);
+        System.out.println(userDTO);
+        UserModel newUser = userServiceImplementation.createUser(userDTO);
         if(newUser != null){
             return  ResponseEntity.status(HttpStatus.CREATED).body(newUser);
         }
@@ -33,7 +32,7 @@ public class UserController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<UserModel> getUserById(@PathVariable(value = "id") UUID userId){
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.findUserById(userId));
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(userServiceImplementation.findUserById(userId));
     }
 
 
