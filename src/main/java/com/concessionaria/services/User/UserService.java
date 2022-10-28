@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.UUID;
 
 public interface UserService {
-    List<UserModel> getAllUsers();
-    UserModel findUserById(UUID id);
-    UserModel createUser(UserDTO userdto);
-    UserModel saveUser(UserModel userModel);
+    List<UserModel> getAll();
+    UserModel findById(UUID id);
+    UserModel create(UserDTO userdto);
+    UserModel update(UserDTO newUser, UUID id);
 }

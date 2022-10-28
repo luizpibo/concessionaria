@@ -18,21 +18,18 @@ public class UserController {
     @Autowired
     private UserServiceImplementation userServiceImplementation;
     @GetMapping
-    public ResponseEntity<List<UserModel>> getAllUsers() {
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(userServiceImplementation.getAllUsers());
+    public ResponseEntity<List<UserModel>> getAll() {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(userServiceImplementation.getAll());
     }
     @PostMapping("/create")
-    public ResponseEntity<UserModel> createUser(@RequestBody @Validated UserDTO userDTO){
-        System.out.println(userDTO);
-        UserModel newUser = userServiceImplementation.createUser(userDTO);
-        if(newUser != null){
-            return  ResponseEntity.status(HttpStatus.CREATED).body(newUser);
-        }
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(newUser);
+    public ResponseEntity<UserModel> create(@Validated @RequestBody UserDTO userDTO) throws Exception{
+        System.out.println("Criando novo user -> "+userDTO.toString());
+        UserModel newUser = userServiceImplementation.create(userDTO);
+        return  new ResponseEntity(newUser, HttpStatus.CREATED);
     }
-    @GetMapping("/{id}")
-    public ResponseEntity<UserModel> getUserById(@PathVariable(value = "id") UUID userId){
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(userServiceImplementation.findUserById(userId));
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<UserModel> findById(@PathVariable(value = "id") UUID userId){
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(userServiceImplementation.findById(userId));
     }
 
 
