@@ -4,18 +4,17 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 import com.concessionaria.utilsClasses.DateAudit;
-import com.sun.istack.NotNull;
 import lombok.*;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name="Pedido")
+@RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@Table(name="Pedido")
 public class PedidoModel extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -11,8 +11,9 @@ import java.util.UUID;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "Cliente")
+@RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@Table(name = "Cliente")
 public class ClienteModel extends DateAudit{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

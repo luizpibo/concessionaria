@@ -1,10 +1,7 @@
 package com.concessionaria.entities;
 
 import com.concessionaria.utilsClasses.DateAudit;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 import javax.management.relation.Role;
 import javax.persistence.*;
@@ -13,8 +10,9 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
+@RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Privilege extends DateAudit {
+public class PrivilegeModel extends DateAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,6 +20,6 @@ public class Privilege extends DateAudit {
     @NonNull
     private String name;
 
-    @ManyToMany(mappedBy = "privileges")
+    @ManyToMany(mappedBy = "roles")
     private List<Role> roles;
 }

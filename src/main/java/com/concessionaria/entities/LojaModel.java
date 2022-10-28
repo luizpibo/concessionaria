@@ -10,8 +10,9 @@ import java.util.UUID;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name="Loja")
+@RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@Table(name="Loja")
 public class LojaModel extends DateAudit{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

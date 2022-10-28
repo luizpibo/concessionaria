@@ -1,20 +1,19 @@
 package com.concessionaria.entities;
 
 import com.concessionaria.utilsClasses.DateAudit;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "Funcionario")
+@RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@Table(name = "Funcionario")
 public class FuncionarioModel extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -46,3 +45,4 @@ public class FuncionarioModel extends DateAudit {
     private UserModel user;
 
 }
+

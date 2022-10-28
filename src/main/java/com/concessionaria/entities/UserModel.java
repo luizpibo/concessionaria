@@ -10,8 +10,9 @@ import java.util.UUID;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "User")
+@RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@Table(name = "User")
 public class UserModel extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,5 +34,5 @@ public class UserModel extends DateAudit {
             name = "user_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(
             name = "role_id", referencedColumnName = "id"))
-    private List<Roles> roles;
+    private List<RoleModel> roles;
 }

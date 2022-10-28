@@ -5,6 +5,7 @@ import com.concessionaria.entities.UserModel;
 import com.concessionaria.repositories.UserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -17,7 +18,9 @@ import java.util.UUID;
 public class UserServiceImplementation implements  UserService{
     @Autowired
     private UserRepository userRepository;
-
+    private BCryptPasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
     public List<UserModel> getAllUsers(){
         return (List<UserModel>) userRepository.findAll();
     }
@@ -34,7 +37,10 @@ public class UserServiceImplementation implements  UserService{
         if(!userRepository.findByEmail(userdto.getEmail()).isEmpty()){
             return null;
         }
-        BeanUtils.copyProperties(userdto, newUser);
+        newUser.setUsername(userdto.getUsername());
+        newUser.setEmail(userdto.getEmail());
+        newUser.setPassword(passwordEncoder().encode(userdto.getPassword()));
+
         return saveUser(newUser);
     }
     public UserModel saveUser(UserModel userModel){

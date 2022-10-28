@@ -9,8 +9,9 @@ import java.util.UUID;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name="Automovel")
+@RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@Table(name="Automovel")
 public class AutomovelModel extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

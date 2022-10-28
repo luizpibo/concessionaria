@@ -9,9 +9,10 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "Role")
+@RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Roles extends DateAudit {
+@Table(name = "Role")
+public class RoleModel extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -29,5 +30,5 @@ public class Roles extends DateAudit {
             name = "role_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(
             name = "privilege_id", referencedColumnName = "id"))
-    private List<Privilege> privileges;
+    private List<PrivilegeModel> privilegeModels;
 }
