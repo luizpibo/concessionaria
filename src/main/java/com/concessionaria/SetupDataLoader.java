@@ -9,7 +9,7 @@ import com.concessionaria.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
@@ -30,9 +30,9 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     @Autowired
     private PrivilegeRepository privilegeRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
+    private BCryptPasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event){
@@ -50,11 +50,12 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
         user.setEmail("luiz@luiz.com");
         user.setUsername("luizpibo");
-        user.setPassword(passwordEncoder.encode("teste"));
+        user.setPassword(passwordEncoder().encode("teste"));
         user.setRoles(Arrays.asList(adminRole));
-        userRepository.save(user);
+        user.setEnabled(true);
+        System.out.println("Usuario inical da aplicação: "+ user);
+        //userRepository.save(user);
          alreadySetup = true;
-
     }
 
     @Transactional
@@ -74,7 +75,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         RoleModel role = roleRepository.findByName(name);
         if(role == null){
             role = new RoleModel(name);
-            role.setPrivilegeModels(privileges);
+            role.setPrivileges(privileges);
             roleRepository.save(role);
         }
         return role;

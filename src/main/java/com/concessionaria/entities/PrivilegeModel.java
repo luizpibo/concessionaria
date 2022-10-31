@@ -3,7 +3,6 @@ package com.concessionaria.entities;
 import com.concessionaria.utilsClasses.DateAudit;
 import lombok.*;
 
-import javax.management.relation.Role;
 import javax.persistence.*;
 import java.util.List;
 
@@ -20,6 +19,6 @@ public class PrivilegeModel extends DateAudit {
     @NonNull
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
-    private List<Role> roles;
+    @ManyToMany(mappedBy = "privileges")
+    private List<RoleModel> roles;
 }

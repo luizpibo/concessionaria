@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 
@@ -17,15 +18,23 @@ public class UserControllerAdvice {
 
     @ResponseBody
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<MessageExceptionHandler> userNotFound(UserNotFoundException userNotFound){
+    public ResponseEntity<MessageExceptionHandler> userNotFound(UserNotFoundException userNotFound, HttpServletRequest request){
         MessageExceptionHandler error = new MessageExceptionHandler(
-                new Date(), HttpStatus.NOT_FOUND.value(), "user not found"
+                new Date(), HttpStatus.NOT_FOUND.value(), userNotFound.getMessage(), request.getRequestURI()
         );
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
     @ResponseBody
+    @ExceptionHandler(UsernameExistsException.class)
+    public ResponseEntity<MessageExceptionHandler> usernameExists(UsernameExistsException usernameExists, HttpServletRequest request){
+        MessageExceptionHandler error = new MessageExceptionHandler(
+                new Date(), HttpStatus.IM_USED.value(), usernameExists.getMessage(), request.getRequestURI()
+        );
+        return new ResponseEntity<>(error, HttpStatus.IM_USED);
+    }
+    @ResponseBody
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<MessageExceptionHandler> argumentsNotValid(MethodArgumentNotValidException notValid){
+    public ResponseEntity<MessageExceptionHandler> argumentsNotValid(MethodArgumentNotValidException notValid, HttpServletRequest request){
 
         BindingResult result = notValid.getBindingResult();
         List<FieldError> fieldErrorList = result.getFieldErrors();
@@ -38,7 +47,7 @@ public class UserControllerAdvice {
             sb.append(" <- ");
         }
         MessageExceptionHandler error = new MessageExceptionHandler(
-                new Date(), HttpStatus.BAD_REQUEST.value(), sb.toString()
+                new Date(), HttpStatus.BAD_REQUEST.value(), sb.toString(), request.getRequestURI()
         );
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }

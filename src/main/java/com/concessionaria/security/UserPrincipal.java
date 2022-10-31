@@ -17,6 +17,7 @@ public class UserPrincipal implements UserDetails {
         this.username = user.getUsername();
         this.password = user.getPassword();
         authorities = user.getRoles().stream().map(role -> {
+            System.out.println("Role ->"+role.getName());
             return new SimpleGrantedAuthority("ROLE_".concat(role.getName()));
         }).collect(Collectors.toList());
         this.authorities = authorities;

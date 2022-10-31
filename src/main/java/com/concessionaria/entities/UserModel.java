@@ -16,16 +16,19 @@ import java.util.UUID;
 public class UserModel extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(unique = true, length = 75)
     private UUID id;
     @Column(unique = true, length = 50, nullable = false)
     @NonNull
     private String username;
-    @Column(length = 50, nullable = false)
+    @Column(length = 75, nullable = false)
     @NonNull
     private String password;
     @Column(unique = true, length = 50, nullable = false)
     @NonNull
     private String email;
+    private boolean enabled;
+    private boolean tokenExpired;
 
     @ManyToMany
     @JoinTable(

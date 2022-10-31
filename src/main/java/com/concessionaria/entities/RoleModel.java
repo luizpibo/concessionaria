@@ -30,5 +30,5 @@ public class RoleModel extends DateAudit {
             name = "role_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(
             name = "privilege_id", referencedColumnName = "id"))
-    private List<PrivilegeModel> privilegeModels;
+    private List<PrivilegeModel> privileges;
 }

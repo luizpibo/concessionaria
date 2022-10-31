@@ -13,4 +13,6 @@ public class MessageExceptionHandler {
     private Integer status;
     @NonNull
     private String message;
+    @NonNull
+    private  String path;
 }

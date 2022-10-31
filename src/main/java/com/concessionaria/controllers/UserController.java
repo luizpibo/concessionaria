@@ -23,7 +23,6 @@ public class UserController {
     }
     @PostMapping("/create")
     public ResponseEntity<UserModel> create(@Validated @RequestBody UserDTO userDTO) throws Exception{
-        System.out.println("Criando novo user -> "+userDTO.toString());
         UserModel newUser = userServiceImplementation.create(userDTO);
         return  new ResponseEntity(newUser, HttpStatus.CREATED);
     }
