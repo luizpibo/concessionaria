@@ -33,6 +33,10 @@ public class PedidoModel extends DateAudit {
     private String descricao;
     @OneToOne
     private ClienteModel cliente;
+    @OneToOne
+    private FuncionarioModel funcionario;
+    @OneToOne
+    private AutomovelModel automovel;
     @OneToMany
     private List<PagamentoModel> pagamentos;
 }

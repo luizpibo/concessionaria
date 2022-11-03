@@ -3,6 +3,7 @@ package com.concessionaria.services.User;
 import com.concessionaria.DTOs.UserDTO;
 import com.concessionaria.entities.RoleModel;
 import com.concessionaria.entities.UserModel;
+import com.concessionaria.exceptionhandler.EmailExistsException;
 import com.concessionaria.exceptionhandler.UserNotFoundException;
 import com.concessionaria.exceptionhandler.UsernameExistsException;
 import com.concessionaria.repositories.RoleRepository;
@@ -51,17 +52,15 @@ public class UserServiceImplementation implements  UserService{
         BeanUtils.copyProperties(newUser, updateUser, "id");
         return userRepository.save(updateUser);
     }
-    public  UserModel create(UserDTO userdto) throws UsernameExistsException {
+    public  UserModel create(UserDTO userdto) throws UsernameExistsException, EmailExistsException {
         System.out.println("Criando novo user -> "+userdto.getUsername()+" "+userdto.getEmail());
         if(!userRepository.findByUsername(userdto.getUsername()).isEmpty()){
             System.out.println("username igual");
             //throw new UsernameExistsException("There is an account with taht username adress: "+userdto.getUsername());
-            return null;
         }
         if(!userRepository.findByEmail(userdto.getEmail()).isEmpty()){
             System.out.println("email igual");
-            //throw new UsernameExistsException("There is an account with taht email adress: "+userdto.getEmail());
-            return null;
+            //throw new EmailExistsException("There is an account with taht email adress: "+userdto.getEmail());
         }
 
         UserModel newUser = new UserModel();

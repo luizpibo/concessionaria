@@ -33,6 +33,14 @@ public class UserControllerAdvice {
         return new ResponseEntity<>(error, HttpStatus.IM_USED);
     }
     @ResponseBody
+    @ExceptionHandler(EmailExistsException.class)
+    public ResponseEntity<MessageExceptionHandler> emailExists(EmailExistsException emailExists, HttpServletRequest request){
+        MessageExceptionHandler error = new MessageExceptionHandler(
+                new Date(), HttpStatus.IM_USED.value(), emailExists.getMessage(), request.getRequestURI()
+        );
+        return new ResponseEntity<>(error, HttpStatus.IM_USED);
+    }
+    @ResponseBody
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<MessageExceptionHandler> argumentsNotValid(MethodArgumentNotValidException notValid, HttpServletRequest request){
 

@@ -1,5 +1,6 @@
 package com.concessionaria.controllers;
 
+import com.concessionaria.DTOs.PedidoDTO;
 import com.concessionaria.entities.PedidoModel;
 import com.concessionaria.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,9 @@ public class PedidoController {
     @GetMapping("/pedido/{id}")
     public ResponseEntity<PedidoModel> getPedidoById(@PathVariable(value = "id") UUID pedidoId){
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(pedidoService.findPedidoById(pedidoId));
+    }
+    @GetMapping("/pedido/create")
+    public ResponseEntity<?> createPedido(@PathVariable(value = "id") PedidoDTO pedidoDTO){
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body("rada rada");
     }
 }

@@ -2,7 +2,9 @@ package com.concessionaria.entities;
 
 import com.concessionaria.utilsClasses.DateAudit;
 import lombok.*;
+import org.springframework.format.number.money.MonetaryAmountFormatter;
 
+import javax.money.Monetary;
 import javax.persistence.*;
 import java.util.UUID;
 
@@ -28,11 +30,14 @@ public class AutomovelModel extends DateAudit {
     @Column(name = "placa", nullable = false, length = 7)
     @NonNull
     private String placa;
-    @Column(name = "classificacao", nullable = false, length = 15)
+    @Column(name = "classi_ficacao", nullable = false, length = 15)
     @NonNull
     private String classificacao;
     @Column(name = "chassi", nullable = false, length = 15)
     @NonNull
     private String chassi;
+    @Column(name = "price", nullable = false, length = 15)
+    @NonNull
+    private Monetary price;
 
 }
