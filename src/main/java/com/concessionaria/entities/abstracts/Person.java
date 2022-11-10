@@ -1,18 +1,18 @@
 package com.concessionaria.entities.abstracts;
 
-import com.concessionaria.utilsClasses.DateAudit;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
 @Data
-public abstract class Person {
+@MappedSuperclass
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+public abstract class Person extends DateAudit{
     @Column(name = "nome", length = 75)
     @NonNull
     private String nome;
@@ -31,4 +31,9 @@ public abstract class Person {
     @Column(name = "endereco")
     @NonNull
     private String endereco;
+    @Column(updatable = false)
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 }

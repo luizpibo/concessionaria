@@ -1,6 +1,6 @@
 package com.concessionaria.entities;
 
-import com.concessionaria.utilsClasses.DateAudit;
+import com.concessionaria.entities.abstracts.DateAudit;
 import lombok.*;
 
 import javax.persistence.*;
@@ -36,10 +36,12 @@ public class LojaModel extends DateAudit{
     @NonNull
     private String tipo;
     @OneToOne
-    private UserModel user;
+    private UserModel admin;
     @OneToMany
     private List<FuncionarioModel> funcionarios;
 
+    @OneToMany
+    private List<AutomovelModel> automoveis;
     @ManyToMany
     @JoinTable(name = "Loja_Cliente",
             joinColumns = @JoinColumn(name = "idCliente"),

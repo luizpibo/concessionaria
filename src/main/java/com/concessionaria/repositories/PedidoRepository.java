@@ -9,5 +9,5 @@ import java.util.UUID;
 
 public interface PedidoRepository extends JpaRepository<PedidoModel, UUID> {
     Optional<PedidoModel> findByNumer_pedido(Long numero_pedido);
-    Optional<PedidoModel> findById(UUID id);
+
 }

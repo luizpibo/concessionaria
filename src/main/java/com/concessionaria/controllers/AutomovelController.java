@@ -32,6 +32,7 @@ public class AutomovelController {
     public ResponseEntity<AutomovelModel> createNewAutomovel(@Validated @RequestBody AutomovelDTO automovelDTO){
         return ResponseEntity.status(HttpStatus.CREATED).body(automovelImplementation.create(automovelDTO));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> deleteAutomovel(@PathVariable(value = "id")UUID automovel_id ){
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(automovelImplementation.delete(automovel_id));

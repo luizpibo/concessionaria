@@ -19,12 +19,12 @@ public class FuncionarioController {
     @Autowired
     private FuncionarioService funcionarioService;
 
-    @GetMapping("/")
-    public ResponseEntity<List<FuncionarioModel>> getAllUsers() {
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(funcionarioService.getAllFuncionario());
+    @GetMapping("/{loja_id}")
+    public ResponseEntity<List<FuncionarioModel>> getAllUsers(@PathVariable(value = "loja_id") UUID lojaId) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(funcionarioService.getAllByLojaId(lojaId));
     }
 
-    @GetMapping("/funcionario/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<FuncionarioModel> getFuncionarioById(@PathVariable(value = "id") UUID userId){
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(funcionarioService.findFuncionarioById(userId));
     }

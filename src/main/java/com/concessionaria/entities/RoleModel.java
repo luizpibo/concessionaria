@@ -1,6 +1,6 @@
 package com.concessionaria.entities;
 
-import com.concessionaria.utilsClasses.DateAudit;
+import com.concessionaria.entities.abstracts.DateAudit;
 import lombok.*;
 
 import javax.persistence.*;

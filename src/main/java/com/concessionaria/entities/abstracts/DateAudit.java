@@ -1,4 +1,4 @@
-package com.concessionaria.utilsClasses;
+package com.concessionaria.entities.abstracts;
 
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;

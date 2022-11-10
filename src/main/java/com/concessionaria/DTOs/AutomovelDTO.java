@@ -7,6 +7,7 @@ import lombok.NonNull;
 
 import javax.money.Monetary;
 import javax.persistence.Column;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -26,4 +27,6 @@ public class AutomovelDTO {
     private String chassi;
     @NonNull
     private Monetary price;
+    @NonNull
+    private UUID loja_id;
 }

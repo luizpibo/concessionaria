@@ -1,6 +1,6 @@
 package com.concessionaria.entities;
 
-import com.concessionaria.utilsClasses.DateAudit;
+import com.concessionaria.entities.abstracts.DateAudit;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,8 +27,8 @@ public class UserModel extends DateAudit {
     @Column(unique = true, length = 100, nullable = false)
     @NonNull
     private String email;
-    private boolean enabled;
-    private boolean tokenExpired;
+    private boolean enabled = false;
+    private boolean tokenExpired = true;
 
     @ManyToMany
     @JoinTable(

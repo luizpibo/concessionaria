@@ -3,6 +3,7 @@ package com.concessionaria.services.Automovel;
 import com.concessionaria.DTOs.AutomovelDTO;
 import com.concessionaria.entities.AutomovelModel;
 import com.concessionaria.repositories.AutomovelRepository;
+import com.concessionaria.repositories.LojaRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,10 @@ import java.util.UUID;
 public class AutomovelImplementation implements AutomovelService{
     @Autowired
     private AutomovelRepository automovelRepository;
+
+    @Autowired
+    private LojaRepository lojaRepository;
+
     @Override
     public List<AutomovelModel> getAll(){return (List<AutomovelModel>) automovelRepository.findAll();}
     @Override
@@ -24,10 +29,16 @@ public class AutomovelImplementation implements AutomovelService{
     }
     @Override
     public AutomovelModel create(AutomovelDTO automovelDTO) {
-        AutomovelModel newAutomovel = new AutomovelModel();
-        BeanUtils.copyProperties(automovelDTO, newAutomovel);
-        return automovelRepository.save(newAutomovel);
+        var loja = lojaRepository.findById(automovelDTO.getLoja_id());
+        if(loja.isPresent()){
+            AutomovelModel newAutomovel = new AutomovelModel();
+            BeanUtils.copyProperties(automovelDTO, newAutomovel);
+            newAutomovel.setLoja(loja.get());
+            return automovelRepository.save(newAutomovel);
+        }
+        return null;
     }
+
     @Override
     public boolean delete (UUID automovel_id){
         var automovel = automovelRepository.findById(automovel_id);

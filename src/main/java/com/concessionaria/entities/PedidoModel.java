@@ -3,7 +3,7 @@ package com.concessionaria.entities;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-import com.concessionaria.utilsClasses.DateAudit;
+import com.concessionaria.entities.abstracts.DateAudit;
 import lombok.*;
 
 import java.util.List;
