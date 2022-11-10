@@ -7,5 +7,5 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface AutomovelRepository extends JpaRepository<AutomovelModel, UUID> {
-    Optional<AutomovelModel> findById(UUID id);
+
 }

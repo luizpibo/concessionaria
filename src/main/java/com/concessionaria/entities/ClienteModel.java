@@ -1,5 +1,6 @@
 package com.concessionaria.entities;
 
+import com.concessionaria.entities.abstracts.Person;
 import com.concessionaria.utilsClasses.DateAudit;
 import lombok.*;
 
@@ -14,7 +15,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "Cliente")
-public class ClienteModel extends DateAudit{
+public class ClienteModel extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -42,5 +43,4 @@ public class ClienteModel extends DateAudit{
     private List<PedidoModel> pedidos;
     @OneToOne
     private UserModel user;
-
 }

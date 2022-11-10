@@ -21,8 +21,8 @@ public class UserController {
     public ResponseEntity<List<UserModel>> getAll() {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(userServiceImplementation.getAll());
     }
-    @PostMapping("/create")
-    public ResponseEntity<UserModel> create(@Validated @RequestBody UserDTO userDTO) throws Exception{
+    @PostMapping("/create_user")
+    public ResponseEntity<UserModel> createUser(@Validated @RequestBody UserDTO userDTO) throws Exception{
         UserModel newUser = userServiceImplementation.create(userDTO);
         return  new ResponseEntity(newUser, HttpStatus.CREATED);
     }
@@ -31,5 +31,9 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(userServiceImplementation.findById(userId));
     }
 
-
+    @GetMapping("/create_vendedor")
+    public ResponseEntity<UserModel> createVendedor(@Validated @RequestBody UserDTO userDTO) throws Exception{
+        UserModel newUser = userServiceImplementation.create(userDTO);
+        return  new ResponseEntity(newUser, HttpStatus.CREATED);
+    }
 }

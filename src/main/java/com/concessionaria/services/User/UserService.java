@@ -13,4 +13,5 @@ public interface UserService {
     UserModel findById(UUID id);
     UserModel create (UserDTO userdto) throws UsernameExistsException, EmailExistsException;
     UserModel update(UserDTO newUser, UUID id);
+    UserDTO addRoleToUser(UUID userID, String RoleName);
 }

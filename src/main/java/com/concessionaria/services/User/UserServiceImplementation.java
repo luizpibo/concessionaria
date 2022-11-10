@@ -34,17 +34,18 @@ public class UserServiceImplementation implements  UserService{
     }
 
     //Pegar todos os usuários
+    @Override
     public List<UserModel> getAll(){
         List<UserModel> users = userRepository.findAll();
         return users;
     }
-
     //Buscando usuário pelo id
+    @Override
     public UserModel findById(UUID id) {
         Optional<UserModel> user = userRepository.findById(id);
         return user.orElseThrow(() -> new UserNotFoundException());
     }
-
+    @Override
     public UserModel update(UserDTO newUser, UUID id){
         findById(id);
         UserModel updateUser = userRepository.findById(id).get();
@@ -52,8 +53,8 @@ public class UserServiceImplementation implements  UserService{
         BeanUtils.copyProperties(newUser, updateUser, "id");
         return userRepository.save(updateUser);
     }
+    @Override
     public  UserModel create(UserDTO userdto) throws UsernameExistsException, EmailExistsException {
-        System.out.println("Criando novo user -> "+userdto.getUsername()+" "+userdto.getEmail());
         if(!userRepository.findByUsername(userdto.getUsername()).isEmpty()){
             System.out.println("username igual");
             //throw new UsernameExistsException("There is an account with taht username adress: "+userdto.getUsername());
@@ -74,4 +75,23 @@ public class UserServiceImplementation implements  UserService{
         newUser.setRoles(Arrays.asList(userRole));
         return userRepository.save(newUser);
     }
+    @Override
+    public  UserDTO addRoleToUser(UUID userID, String RoleName) throws UsernameExistsException, EmailExistsException {
+        var user = userRepository.findById(userID).get();
+        if(user!=null){
+            RoleModel role = roleRepository.findByName(RoleName);
+            if(role != null){
+                List<RoleModel> newRoleList = user.getRoles();
+                if(!newRoleList.contains(role)){
+                    newRoleList.add(role);
+                    user.setRoles(newRoleList);
+                }
+
+            }
+        }
+        UserDTO userDTO = new UserDTO();
+        BeanUtils.copyProperties(user, userDTO);
+        return userDTO;
+    }
+
 }

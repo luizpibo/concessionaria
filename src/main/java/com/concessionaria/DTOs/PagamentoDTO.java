@@ -4,14 +4,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+
+import javax.persistence.Column;
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO {
+public class PagamentoDTO {
     @NonNull
-    private String username;
+    private LocalDateTime data_vencimento;
     @NonNull
-    private String password;
+    private LocalDateTime data_pagamento;
     @NonNull
-    private String email;
+    private int tipo_pagamento;
 }

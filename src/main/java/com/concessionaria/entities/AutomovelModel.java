@@ -30,7 +30,7 @@ public class AutomovelModel extends DateAudit {
     @Column(name = "placa", nullable = false, length = 7)
     @NonNull
     private String placa;
-    @Column(name = "classi_ficacao", nullable = false, length = 15)
+    @Column(name = "classificacao", nullable = false, length = 20)
     @NonNull
     private String classificacao;
     @Column(name = "chassi", nullable = false, length = 15)
