@@ -2,8 +2,8 @@ package com.concessionaria.services.User;
 
 import com.concessionaria.DTOs.UserDTO;
 import com.concessionaria.entities.UserModel;
-import com.concessionaria.exceptionhandler.EmailExistsException;
-import com.concessionaria.exceptionhandler.UsernameExistsException;
+import com.concessionaria.exceptionhandler.exceptions.userController.EmailExistsException;
+import com.concessionaria.exceptionhandler.exceptions.userController.UsernameExistsException;
 
 import java.util.List;
 import java.util.UUID;

@@ -1,6 +1,5 @@
 package com.concessionaria.entities;
 
-import com.concessionaria.entities.abstracts.DateAudit;
 import com.concessionaria.entities.abstracts.Person;
 import lombok.*;
 

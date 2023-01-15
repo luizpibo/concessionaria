@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.UUID;
+
 @Service
 @Transactional
 public class PagamentoServiceImplementation implements PagamentoService {
@@ -15,7 +16,9 @@ public class PagamentoServiceImplementation implements PagamentoService {
     private PagamentoRepository pagamentoRepository;
 
     @Override
-    public List<PagamentoModel> getAllPagamento(){return (List<PagamentoModel>) pagamentoRepository.findAll();}
+    public List<PagamentoModel> getAllPagamento() {
+        return (List<PagamentoModel>) pagamentoRepository.findAll();
+    }
 
     @Override
     public PagamentoModel findPagamentoById(UUID id) {

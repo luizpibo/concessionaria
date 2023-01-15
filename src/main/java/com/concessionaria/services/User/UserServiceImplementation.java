@@ -3,9 +3,9 @@ package com.concessionaria.services.User;
 import com.concessionaria.DTOs.UserDTO;
 import com.concessionaria.entities.RoleModel;
 import com.concessionaria.entities.UserModel;
-import com.concessionaria.exceptionhandler.EmailExistsException;
-import com.concessionaria.exceptionhandler.UserNotFoundException;
-import com.concessionaria.exceptionhandler.UsernameExistsException;
+import com.concessionaria.exceptionhandler.exceptions.userController.EmailExistsException;
+import com.concessionaria.exceptionhandler.exceptions.userController.UserNotFoundException;
+import com.concessionaria.exceptionhandler.exceptions.userController.UsernameExistsException;
 import com.concessionaria.repositories.RoleRepository;
 import com.concessionaria.repositories.UserRepository;
 import org.springframework.beans.BeanUtils;
@@ -57,11 +57,12 @@ public class UserServiceImplementation implements  UserService{
     public  UserModel create(UserDTO userdto) throws UsernameExistsException, EmailExistsException {
         if(!userRepository.findByUsername(userdto.getUsername()).isEmpty()){
             System.out.println("username igual");
-            //throw new UsernameExistsException("There is an account with taht username adress: "+userdto.getUsername());
+            throw new UsernameExistsException("There is an account with taht username adress: "+userdto.getUsername());
         }
+        
         if(!userRepository.findByEmail(userdto.getEmail()).isEmpty()){
             System.out.println("email igual");
-            //throw new EmailExistsException("There is an account with taht email adress: "+userdto.getEmail());
+            throw new EmailExistsException("There is an account with taht email adress: "+userdto.getEmail());
         }
 
         UserModel newUser = new UserModel();

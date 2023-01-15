@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.concessionaria.exceptionhandler.exceptions.userController.EmailExistsException;
+import com.concessionaria.exceptionhandler.exceptions.userController.UserNotFoundException;
+import com.concessionaria.exceptionhandler.exceptions.userController.UsernameExistsException;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
